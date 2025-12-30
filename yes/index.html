@@ -1,1 +1,560 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Feri</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(160deg, #ffd6f0 0%, #f5c3e6 30%, #e8b4dc 60%, #dba5d2 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        .ambient-bg {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 0;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .blob {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.4;
+            animation: float 20s ease-in-out infinite;
+        }
+
+        .blob1 { width: 500px; height: 500px; background: #ff94d6; top: -150px; left: -150px; }
+        .blob2 { width: 450px; height: 450px; background: #c77dff; bottom: -150px; right: -150px; animation-delay: -5s; }
+        .blob3 { width: 400px; height: 400px; background: #ffd6f0; top: 40%; left: 50%; animation-delay: -10s; }
+        .blob4 { width: 350px; height: 350px; background: #e0aaff; top: 20%; right: -100px; animation-delay: -15s; }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(50px, -50px) scale(1.1); }
+            66% { transform: translate(-50px, 50px) scale(0.9); }
+        }
+
+        .floating-elements {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .float-item {
+            position: absolute;
+            font-size: 2em;
+            opacity: 0.15;
+            animation: floatAround 15s ease-in-out infinite;
+        }
+
+        @keyframes floatAround {
+            0%, 100% { 
+                transform: translate(0, 0) rotate(0deg);
+                opacity: 0.15;
+            }
+            25% { 
+                transform: translate(30px, -40px) rotate(90deg);
+                opacity: 0.25;
+            }
+            50% { 
+                transform: translate(-20px, -80px) rotate(180deg);
+                opacity: 0.2;
+            }
+            75% { 
+                transform: translate(40px, -60px) rotate(270deg);
+                opacity: 0.3;
+            }
+        }
+
+        .particles {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: rgba(168, 85, 247, 0.3);
+            border-radius: 50%;
+            animation: particleFloat linear infinite;
+        }
+
+        @keyframes particleFloat {
+            0% {
+                transform: translateY(100vh) scale(0);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh) scale(1);
+                opacity: 0;
+            }
+        }
+
+        .container {
+            max-width: 440px;
+            margin: 0 auto;
+            padding: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-section {
+            text-align: center;
+            margin-bottom: 30px;
+            animation: fadeInDown 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 2.8em;
+            font-weight: 700;
+            background: linear-gradient(135deg, #d946ef, #a855f7, #7c3aed);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 8px;
+            letter-spacing: -1px;
+        }
+
+        .subtitle {
+            font-size: 1.1em;
+            color: #7c3aed;
+            font-weight: 500;
+        }
+
+        .bento-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 16px;
+            animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.2s backwards;
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .bento-item {
+            background: rgba(255, 255, 255, 0.75);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .bento-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(217, 70, 239, 0.05), rgba(124, 58, 237, 0.05));
+            opacity: 0;
+            transition: opacity 0.4s;
+        }
+
+        .bento-item:hover::before {
+            opacity: 1;
+        }
+
+        .bento-item:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px rgba(124, 58, 237, 0.2);
+        }
+
+        .bento-large {
+            grid-column: span 2;
+        }
+
+        .kuromi-wrapper {
+            position: relative;
+            width: 100%;
+            padding-top: 100%;
+            border-radius: 16px;
+            overflow: hidden;
+            background: linear-gradient(135deg, #ffd6f0, #f5c3e6);
+        }
+
+        .kuromi-wrapper img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .bento-item:hover .kuromi-wrapper img {
+            transform: scale(1.05);
+        }
+
+        .message-card {
+            background: rgba(255, 255, 255, 0.75);
+            backdrop-filter: blur(20px);
+            border-radius: 24px;
+            padding: 28px;
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            margin-bottom: 16px;
+            animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.4s backwards;
+        }
+
+        .message-card p {
+            font-size: 1em;
+            line-height: 1.8;
+            color: #374151;
+            margin-bottom: 16px;
+        }
+
+        .message-card strong {
+            color: #a855f7;
+            font-weight: 600;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(217, 70, 239, 0.1), rgba(168, 85, 247, 0.1));
+            border-left: 4px solid #a855f7;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .input-section {
+            background: rgba(255, 255, 255, 0.75);
+            backdrop-filter: blur(20px);
+            border-radius: 24px;
+            padding: 28px;
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.6s backwards;
+        }
+
+        .input-label {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.1em;
+            font-weight: 600;
+            color: #1f2937;
+            margin-bottom: 12px;
+            display: block;
+        }
+
+        .message-input {
+            width: 100%;
+            padding: 16px;
+            border: 2px solid #e5e7eb;
+            border-radius: 16px;
+            font-size: 1em;
+            font-family: inherit;
+            resize: vertical;
+            min-height: 120px;
+            transition: all 0.3s;
+            background: white;
+        }
+
+        .message-input:focus {
+            outline: none;
+            border-color: #a855f7;
+            box-shadow: 0 0 0 4px rgba(168, 85, 247, 0.1);
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 16px;
+            margin-top: 12px;
+            background: linear-gradient(135deg, #d946ef, #a855f7);
+            color: white;
+            border: none;
+            border-radius: 16px;
+            font-size: 1.05em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: 0 4px 12px rgba(168, 85, 247, 0.3);
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(168, 85, 247, 0.4);
+        }
+
+        .submit-btn:active {
+            transform: translateY(0);
+        }
+
+        .saved-messages {
+            margin-top: 20px;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .saved-message {
+            background: linear-gradient(135deg, rgba(217, 70, 239, 0.05), rgba(168, 85, 247, 0.05));
+            border-left: 3px solid #a855f7;
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 12px;
+            animation: slideIn 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(-20px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        .saved-message-text {
+            color: #374151;
+            line-height: 1.6;
+            margin-bottom: 8px;
+        }
+
+        .saved-message-time {
+            font-size: 0.85em;
+            color: #9ca3af;
+        }
+
+        .sparkle-effect {
+            position: fixed;
+            pointer-events: none;
+            z-index: 999;
+            font-size: 20px;
+            animation: sparkleFloat 1s ease-out forwards;
+        }
+
+        @keyframes sparkleFloat {
+            0% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(-100px) scale(0.5);
+            }
+        }
+
+        .divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #e5e7eb, transparent);
+            margin: 20px 0;
+        }
+
+        @media (max-width: 400px) {
+            .title { font-size: 2.2em; }
+            .bento-grid { gap: 10px; }
+            .bento-item { padding: 16px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="ambient-bg">
+        <div class="blob blob1"></div>
+        <div class="blob blob2"></div>
+        <div class="blob blob3"></div>
+        <div class="blob blob4"></div>
+    </div>
+
+    <div class="floating-elements" id="floatingElements"></div>
+    <div class="particles" id="particles"></div>
+
+    <div class="container">
+        <div class="hero-section">
+            <h1 class="title">Happy Birthday</h1>
+            <p class="subtitle">Feri 🎂</p>
+        </div>
+
+        <div class="bento-grid">
+            <div class="bento-item bento-large">
+                <div class="kuromi-wrapper">
+                    <img src="kuromi.png" alt="Kuromi">
+                </div>
+            </div>
+        </div>
+
+        <div class="message-card">
+            <p>Pertama aku mau bilang <strong>SELAMAT ULANG TAHUN</strong> dan terimakasih kalau kamu udah jadi teman aku walau ada masalah dikit akibat kita yang belum terlalu kenal, tapi maaf ya atas ke-isengan aku waktu itu.. Aku ngirain-nya kamu nggak sampai segitunya, I'm so sorry.. maaf sudah bikin kamu ovt karena aku.. sekali lagi aku minta maaf ya atas semuanya.</p>
+
+            <p>Aku nunggu momen ini selama <strong>20 hari lebih</strong>, untuk bilang hal ini, aku gapernah nyesel sekalipun kenal sama kamu atau sakit hati gaada sama sekali, malah seneng banget.</p>
+
+            <div class="highlight-box">
+                <p><strong>Jujur ya</strong>, aku semenjak kenal kamu beneran ngerubah jalan hidup aku. Gila, dari yang awalnya aku jarang sholat di sekolah pas kelas 11 ini, jadi sering sholat. Dari aku yang jarang berdoa jadi doa terus, dari aku yang jarang sholat tepat waktu jadi tepat waktu. Kenapa? Biar setara. Kamu berdoa untuk aku.. aku berdoa untuk kamu kayak ayam geprek campur sambal ENAK 😂</p>
+            </div>
+
+            <div class="divider"></div>
+
+            <p>Itu atas kesadaran aku untuk memperbaiki demi Allah, demi orangtua dan keluarga, habis itu demi kamu. Tapi ini beneran tbh aku gamau bohong, aku jujur kalau kamu emang ngerasa aku not a good guy, I'm so sorry. Tapi <strong>terimakasih kamu udah ada</strong>, semenjak ada kamu emang ada tujuan yang bener.</p>
+
+            <p>Kayanya emang kamu harus beneran diseriusin, so aku mau mengusahakan semuanya yang terbaik dan harus konsisten. Bukan berarti aku mengejar <strong>c i n t a</strong> HOK CUH 😅, tapi emang aku sadar kalau aku begitu terus gimana mau setara sama kamu coba? Gimana mau ngerasa pantas kalau begitu terus..</p>
+
+            <div class="divider"></div>
+
+            <p>Jadi intinya <strong>TERIMAKASIH BANYAK</strong>, berkat kamu ak jadi bisa menjadi org yg lebih baik, MAGANDA KA, mahal kita dahil kay allah</p>
+
+            <div class="highlight-box">
+                <p style="text-align: center; font-size: 1.05em;">Selamat berjuang.. sukses, have a nice day Feri<br><strong>WISH YOU ALL THE BEST! 🌟</strong></p>
+            </div>
+        </div>
+
+        <div class="input-section">
+            <label class="input-label">💝 Tulis harapan kamu atau terimakasih atas syukur selama ini</label>
+            <textarea 
+                class="message-input" 
+                id="userMessage"
+                placeholder="Ketik pesanmu di sini..."></textarea>
+            <button class="submit-btn" onclick="saveMessage()">
+                Kirim Pesan ✨
+            </button>
+
+            <div class="saved-messages" id="savedMessages"></div>
+        </div>
+    </div>
+
+    <script>
+        // Create floating elements
+        const floatEmojis = ['🌸', '🦋', '✨', '💫', '🌺', '🎀', '💜', '🦇', '🍒', '💎', '🎃', '⭐'];
+        const floatingContainer = document.getElementById('floatingElements');
+        
+        for(let i = 0; i < 20; i++) {
+            const item = document.createElement('div');
+            item.className = 'float-item';
+            item.textContent = floatEmojis[Math.floor(Math.random() * floatEmojis.length)];
+            item.style.left = Math.random() * 100 + '%';
+            item.style.top = Math.random() * 100 + '%';
+            item.style.animationDelay = Math.random() * 15 + 's';
+            item.style.animationDuration = (Math.random() * 10 + 10) + 's';
+            floatingContainer.appendChild(item);
+        }
+
+        // Create particles
+        const particlesContainer = document.getElementById('particles');
+        
+        function createParticle() {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.animationDuration = (Math.random() * 3 + 3) + 's';
+            particle.style.animationDelay = Math.random() * 2 + 's';
+            particlesContainer.appendChild(particle);
+            
+            setTimeout(() => particle.remove(), 6000);
+        }
+
+        for(let i = 0; i < 30; i++) {
+            setTimeout(createParticle, i * 200);
+        }
+        setInterval(createParticle, 400);
+
+        function loadMessages() {
+            const messages = JSON.parse(localStorage.getItem('birthdayMessages') || '[]');
+            const container = document.getElementById('savedMessages');
+            container.innerHTML = '';
+            
+            messages.forEach(msg => {
+                const div = document.createElement('div');
+                div.className = 'saved-message';
+                div.innerHTML = `
+                    <div class="saved-message-text">${msg.text}</div>
+                    <div class="saved-message-time">${msg.time}</div>
+                `;
+                container.appendChild(div);
+            });
+        }
+
+        function saveMessage() {
+            const input = document.getElementById('userMessage');
+            const message = input.value.trim();
+            
+            if(!message) {
+                alert('Yuk tulis pesanmu dulu! 💕');
+                return;
+            }
+
+            const messages = JSON.parse(localStorage.getItem('birthdayMessages') || '[]');
+            const now = new Date();
+            const timeStr = now.toLocaleString('id-ID', { 
+                day: 'numeric', 
+                month: 'long', 
+                year: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit'
+            });
+
+            messages.unshift({
+                text: message,
+                time: timeStr
+            });
+
+            localStorage.setItem('birthdayMessages', JSON.stringify(messages));
+
+            // Sparkle effect
+            for(let i = 0; i < 30; i++) {
+                setTimeout(() => {
+                    const sparkle = document.createElement('div');
+                    sparkle.className = 'sparkle-effect';
+                    sparkle.textContent = ['✨', '💖', '🎉', '🌟', '💫'][Math.floor(Math.random() * 5)];
+                    sparkle.style.left = Math.random() * window.innerWidth + 'px';
+                    sparkle.style.top = Math.random() * window.innerHeight + 'px';
+                    document.body.appendChild(sparkle);
+                    setTimeout(() => sparkle.remove(), 1000);
+                }, i * 40);
+            }
+
+            setTimeout(() => {
+                alert('💝 Pesanmu berhasil tersimpan!\n\nTerimakasih sudah berbagi! 🎉');
+                input.value = '';
+                loadMessages();
+            }, 800);
+        }
+
+        // Load messages on start
+        loadMessages();
+
+        // Enter to submit
+        document.getElementById('userMessage').addEventListener('keydown', function(e) {
+            if(e.key === 'Enter' && e.ctrlKey) {
+                saveMessage();
+            }
+        });
+    </script>
+</body>
+</html>
