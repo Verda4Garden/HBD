@@ -19,6 +19,7 @@
             min-height: 100vh;
             overflow-x: hidden;
             position: relative;
+            -webkit-overflow-scrolling: touch;
         }
 
         .ambient-bg {
@@ -88,11 +89,14 @@
         .game-card {
             background: rgba(255, 255, 255, 0.85);
             backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
             border-radius: 24px;
             padding: 32px;
             border: 1px solid rgba(255, 255, 255, 0.9);
             margin-bottom: 20px;
             box-shadow: 0 10px 30px rgba(124, 58, 237, 0.15);
+            will-change: transform;
+            transform: translateZ(0);
         }
 
         .game-instruction {
@@ -227,12 +231,15 @@
         .photo-item {
             background: rgba(255, 255, 255, 0.75);
             backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
             border-radius: 20px;
             padding: 12px;
             border: 1px solid rgba(255, 255, 255, 0.8);
             transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
             position: relative;
             overflow: hidden;
+            will-change: transform;
+            transform: translateZ(0);
         }
 
         .photo-item::before {
@@ -298,11 +305,14 @@
         .message-card {
             background: rgba(255, 255, 255, 0.75);
             backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
             border-radius: 24px;
             padding: 28px;
             border: 1px solid rgba(255, 255, 255, 0.8);
             margin-bottom: 16px;
             animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.4s backwards;
+            will-change: transform;
+            transform: translateZ(0);
         }
 
         .message-card p {
@@ -328,10 +338,13 @@
         .input-section {
             background: rgba(255, 255, 255, 0.75);
             backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
             border-radius: 24px;
             padding: 28px;
             border: 1px solid rgba(255, 255, 255, 0.8);
             animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.6s backwards;
+            will-change: transform;
+            transform: translateZ(0);
         }
 
         .input-label {
