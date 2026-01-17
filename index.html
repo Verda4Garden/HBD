@@ -51,78 +51,6 @@
             66% { transform: translate(-50px, 50px) scale(0.9); }
         }
 
-        .floating-elements {
-            position: fixed;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            z-index: 0;
-            pointer-events: none;
-        }
-
-        .float-item {
-            position: absolute;
-            font-size: 2em;
-            opacity: 0.15;
-            animation: floatAround 15s ease-in-out infinite;
-        }
-
-        @keyframes floatAround {
-            0%, 100% { 
-                transform: translate(0, 0) rotate(0deg);
-                opacity: 0.15;
-            }
-            25% { 
-                transform: translate(30px, -40px) rotate(90deg);
-                opacity: 0.25;
-            }
-            50% { 
-                transform: translate(-20px, -80px) rotate(180deg);
-                opacity: 0.2;
-            }
-            75% { 
-                transform: translate(40px, -60px) rotate(270deg);
-                opacity: 0.3;
-            }
-        }
-
-        .particles {
-            position: fixed;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            z-index: 0;
-            pointer-events: none;
-        }
-
-        .particle {
-            position: absolute;
-            width: 4px;
-            height: 4px;
-            background: rgba(168, 85, 247, 0.3);
-            border-radius: 50%;
-            animation: particleFloat linear infinite;
-        }
-
-        @keyframes particleFloat {
-            0% {
-                transform: translateY(100vh) scale(0);
-                opacity: 0;
-            }
-            10% {
-                opacity: 1;
-            }
-            90% {
-                opacity: 1;
-            }
-            100% {
-                transform: translateY(-100vh) scale(1);
-                opacity: 0;
-            }
-        }
-
         .container {
             max-width: 440px;
             margin: 0 auto;
@@ -131,15 +59,138 @@
             z-index: 1;
         }
 
-        .hero-section {
+        .game-screen {
+            display: block;
             text-align: center;
-            margin-bottom: 30px;
-            animation: fadeInDown 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .main-content {
+            display: none;
+        }
+
+        .game-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 2.5em;
+            font-weight: 700;
+            background: linear-gradient(135deg, #d946ef, #a855f7, #7c3aed);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 20px;
+            animation: fadeInDown 0.8s;
         }
 
         @keyframes fadeInDown {
             from { opacity: 0; transform: translateY(-30px); }
             to { opacity: 1; transform: translateY(0); }
+        }
+
+        .game-card {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(20px);
+            border-radius: 24px;
+            padding: 32px;
+            border: 1px solid rgba(255, 255, 255, 0.9);
+            margin-bottom: 20px;
+            box-shadow: 0 10px 30px rgba(124, 58, 237, 0.15);
+        }
+
+        .game-instruction {
+            font-size: 1.05em;
+            color: #374151;
+            margin-bottom: 24px;
+            line-height: 1.6;
+        }
+
+        .memory-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+            margin: 24px 0;
+        }
+
+        .memory-card {
+            aspect-ratio: 1;
+            background: linear-gradient(135deg, #ff94d6, #d946ef);
+            border-radius: 16px;
+            cursor: pointer;
+            transition: all 0.4s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5em;
+            position: relative;
+            box-shadow: 0 4px 12px rgba(217, 70, 239, 0.3);
+            transform-style: preserve-3d;
+        }
+
+        .memory-card.flipped {
+            background: white;
+            transform: rotateY(180deg);
+        }
+
+        .memory-card.matched {
+            background: linear-gradient(135deg, #a855f7, #7c3aed);
+            animation: matchPulse 0.6s;
+            pointer-events: none;
+        }
+
+        @keyframes matchPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .memory-card .card-front,
+        .memory-card .card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            backface-visibility: hidden;
+            border-radius: 16px;
+        }
+
+        .memory-card .card-front {
+            background: linear-gradient(135deg, #ff94d6, #d946ef);
+        }
+
+        .memory-card .card-back {
+            background: white;
+            transform: rotateY(180deg);
+        }
+
+        .game-stats {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 20px;
+            gap: 12px;
+        }
+
+        .stat-box {
+            background: linear-gradient(135deg, rgba(217, 70, 239, 0.1), rgba(168, 85, 247, 0.1));
+            padding: 12px 20px;
+            border-radius: 12px;
+            flex: 1;
+        }
+
+        .stat-label {
+            font-size: 0.85em;
+            color: #6b7280;
+            margin-bottom: 4px;
+        }
+
+        .stat-value {
+            font-size: 1.3em;
+            font-weight: 700;
+            color: #a855f7;
+        }
+
+        .hero-section {
+            text-align: center;
+            margin-bottom: 30px;
+            animation: fadeInDown 0.8s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         .title {
@@ -160,7 +211,7 @@
             font-weight: 500;
         }
 
-        .bento-grid {
+        .photo-gallery {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 12px;
@@ -173,18 +224,18 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        .bento-item {
+        .photo-item {
             background: rgba(255, 255, 255, 0.75);
             backdrop-filter: blur(20px);
             border-radius: 20px;
-            padding: 20px;
+            padding: 12px;
             border: 1px solid rgba(255, 255, 255, 0.8);
             transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
             position: relative;
             overflow: hidden;
         }
 
-        .bento-item::before {
+        .photo-item::before {
             content: '';
             position: absolute;
             top: 0;
@@ -196,20 +247,20 @@
             transition: opacity 0.4s;
         }
 
-        .bento-item:hover::before {
+        .photo-item:hover::before {
             opacity: 1;
         }
 
-        .bento-item:hover {
+        .photo-item:hover {
             transform: translateY(-4px);
             box-shadow: 0 20px 40px rgba(124, 58, 237, 0.2);
         }
 
-        .bento-large {
+        .photo-large {
             grid-column: span 2;
         }
 
-        .kuromi-wrapper {
+        .photo-wrapper {
             position: relative;
             width: 100%;
             padding-top: 100%;
@@ -218,7 +269,11 @@
             background: linear-gradient(135deg, #ffd6f0, #f5c3e6);
         }
 
-        .kuromi-wrapper img {
+        .photo-large .photo-wrapper {
+            padding-top: 60%;
+        }
+
+        .photo-wrapper img {
             position: absolute;
             top: 0;
             left: 0;
@@ -228,8 +283,16 @@
             transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        .bento-item:hover .kuromi-wrapper img {
+        .photo-item:hover .photo-wrapper img {
             transform: scale(1.05);
+        }
+
+        .photo-caption {
+            margin-top: 8px;
+            font-size: 0.85em;
+            color: #7c3aed;
+            font-weight: 500;
+            text-align: center;
         }
 
         .message-card {
@@ -354,25 +417,6 @@
             color: #9ca3af;
         }
 
-        .sparkle-effect {
-            position: fixed;
-            pointer-events: none;
-            z-index: 999;
-            font-size: 20px;
-            animation: sparkleFloat 1s ease-out forwards;
-        }
-
-        @keyframes sparkleFloat {
-            0% {
-                opacity: 1;
-                transform: translateY(0) scale(1);
-            }
-            100% {
-                opacity: 0;
-                transform: translateY(-100px) scale(0.5);
-            }
-        }
-
         .divider {
             height: 1px;
             background: linear-gradient(90deg, transparent, #e5e7eb, transparent);
@@ -381,8 +425,9 @@
 
         @media (max-width: 400px) {
             .title { font-size: 2.2em; }
-            .bento-grid { gap: 10px; }
-            .bento-item { padding: 16px; }
+            .photo-gallery { gap: 10px; }
+            .photo-item { padding: 10px; }
+            .memory-grid { gap: 8px; }
         }
     </style>
 </head>
@@ -394,95 +439,284 @@
         <div class="blob blob4"></div>
     </div>
 
-    <div class="floating-elements" id="floatingElements"></div>
-    <div class="particles" id="particles"></div>
-
     <div class="container">
-        <div class="hero-section">
-            <h1 class="title">Happy Birthday</h1>
-            <p class="subtitle">Feri 🎂</p>
-        </div>
+        <!-- Game Screen -->
+        <div class="game-screen" id="gameScreen">
+            <h1 class="game-title">🎮 Memory Game 🎮</h1>
+            
+            <div class="game-card">
+                <p class="game-instruction">
+                    <strong>Cocokkan semua pasangan kartu!</strong><br>
+                    Klik kartu untuk membaliknya dan temukan pasangannya 🎯
+                </p>
 
-        <div class="bento-grid">
-            <div class="bento-item bento-large">
-                <div class="kuromi-wrapper">
-                    <img src="kuromi.png" alt="Kuromi">
+                <div class="memory-grid" id="memoryGrid"></div>
+
+                <div class="game-stats">
+                    <div class="stat-box">
+                        <div class="stat-label">Gerakan</div>
+                        <div class="stat-value" id="moves">0</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-label">Pasangan</div>
+                        <div class="stat-value" id="matches">0/8</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-label">Waktu</div>
+                        <div class="stat-value" id="timer">0s</div>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <div class="message-card">
-            <p>Pertama aku mau bilang <strong>SELAMAT ULANG TAHUN</strong> dan terimakasih kalau kamu udah jadi teman aku walau ada masalah dikit akibat kita yang belum terlalu kenal, tapi maaf ya atas ke-isengan aku waktu itu.. Aku ngirain-nya kamu nggak sampai segitunya, I'm so sorry.. maaf sudah bikin kamu ovt karena aku.. sekali lagi aku minta maaf ya atas semuanya.</p>
-
-            <p>Aku nunggu momen ini selama <strong>20 hari lebih</strong>, untuk bilang hal ini, aku gapernah nyesel sekalipun kenal sama kamu atau sakit hati gaada sama sekali, malah seneng banget.</p>
-
-            <div class="highlight-box">
-                <p><strong>Jujur ya</strong>, aku semenjak kenal kamu beneran ngerubah jalan hidup aku. Gila, dari yang awalnya aku jarang sholat di sekolah pas kelas 11 ini, jadi sering sholat. Dari aku yang jarang berdoa jadi doa terus, dari aku yang jarang sholat tepat waktu jadi tepat waktu. Kenapa? Biar setara. Kamu berdoa untuk aku.. aku berdoa untuk kamu kayak ayam geprek campur sambal ENAK 😂</p>
+        <!-- Main Content -->
+        <div class="main-content" id="mainContent">
+            <div class="hero-section">
+                <h1 class="title">Happy Birthday</h1>
+                <p class="subtitle">Feri 🎂</p>
             </div>
 
-            <div class="divider"></div>
+            <div class="photo-gallery">
+                <div class="photo-item photo-large">
+                    <div class="photo-wrapper">
+                        <img src="freya1.jpg" alt="Freya 1">
+                    </div>
+                    <div class="photo-caption">Freya 🌟</div>
+                </div>
 
-            <p>Itu atas kesadaran aku untuk memperbaiki demi Allah, demi orangtua dan keluarga, habis itu demi kamu. Tapi ini beneran tbh aku gamau bohong, aku emg bukan cowo yg terbaik tapi ak mw mencoba menjadi yg terbaik entah buat keluarga ak, atau km, So I’m just trying to be the best version of myself all my life. I want to prove myself until I become the best version of myself, tunggu ya, sama terakhir, kalau sudah lulus nanti jgn lost contact... Idk if you like me too or if it’s just me.. Tapi <strong>terimakasih kamu udah ada</strong>, semenjak ada kamu emang ada tujuan yang bener.</p>
+                <div class="photo-item">
+                    <div class="photo-wrapper">
+                        <img src="melody1.jpg" alt="Melody 1">
+                    </div>
+                    <div class="photo-caption">My Melody 🎀</div>
+                </div>
 
-            <p>ak ngerasa ini perlu disikapi dengan kesadaran penuh. maka dari itu, aku memilih untuk berproses dan konsisten memperbaiki diri. bukan semata mengejar perasaan, melainkan karena aku paham "tanpa perubahan, ak pasti terus memikirkan kelayakan ak untuk merasa sejajar dengan lu".</p>
+                <div class="photo-item">
+                    <div class="photo-wrapper">
+                        <img src="melody2.jpg" alt="Melody 2">
+                    </div>
+                    <div class="photo-caption">So Cute! 🌸</div>
+                </div>
 
-            <div class="divider"></div>
+                <div class="photo-item photo-large">
+                    <div class="photo-wrapper">
+                        <img src="freya2.jpg" alt="Freya 2">
+                    </div>
+                    <div class="photo-caption">Freya 💖</div>
+                </div>
 
-            <p>Jadi intinya <strong>TERIMAKASIH BANYAK</strong>, berkat kamu ak jadi bisa menjadi org yg lebih baik, MAGANDA KA, mahal kita dahil kay allah. maaf kalau ini terlalu kelewatan.</p>
+                <div class="photo-item">
+                    <div class="photo-wrapper">
+                        <img src="kuromi.png" alt="Kuromi">
+                    </div>
+                    <div class="photo-caption">Kuromi 💜</div>
+                </div>
 
-            <div class="highlight-box">
-                <p style="text-align: center; font-size: 1.05em;">Selamat berjuang.. sukses, have a nice day Feri<br><strong>WISH YOU ALL THE BEST! 🌟</strong></p>
+                <div class="photo-item">
+                    <div class="photo-wrapper">
+                        <img src="melody3.jpg" alt="Melody 3">
+                    </div>
+                    <div class="photo-caption">Melody 💕</div>
+                </div>
+
+                <div class="photo-item">
+                    <div class="photo-wrapper">
+                        <img src="kenangan1.png" alt="Kenangan 1">
+                    </div>
+                    <div class="photo-caption">Kenangan Bersama 📸</div>
+                </div>
+
+                <div class="photo-item">
+                    <div class="photo-wrapper">
+                        <img src="kenangan2.png" alt="Kenangan 2">
+                    </div>
+                    <div class="photo-caption">Memories ✨</div>
+                </div>
+
+                <div class="photo-item photo-large">
+                    <div class="photo-wrapper">
+                        <img src="fotbar1.jpg" alt="Fotbar 1">
+                    </div>
+                </div>
+
+                <div class="photo-item photo-large">
+                    <div class="photo-wrapper">
+                        <img src="fotbar2.jpg" alt="Fotbar 2">
+                    </div>
+                </div>
+
+                <div class="photo-item photo-large">
+                    <div class="photo-wrapper">
+                        <img src="fotbar3.jpg" alt="Fotbar 3">
+                    </div>
+                </div>
             </div>
-        </div>
 
-        <div class="input-section">
-            <label class="input-label">💝 Tulis harapan kamu atau terimakasih atas syukur selama ini</label>
-            <textarea 
-                class="message-input" 
-                id="userMessage"
-                placeholder="Ketik pesanmu di sini..."></textarea>
-            <button class="submit-btn" onclick="saveMessage()">
-                Kirim Pesan ✨
-            </button>
+            <div class="message-card">
+                <p>Pertama aku mau bilang <strong>SELAMAT ULANG TAHUN</strong> dan terimakasih kalau kamu udah jadi teman aku walau ada masalah dikit akibat kita yang belum terlalu kenal, tapi maaf ya atas ke-isengan aku waktu itu.. Aku ngirain-nya kamu nggak sampai segitunya, I'm so sorry.. maaf sudah bikin kamu ovt karena aku.. sekali lagi aku minta maaf ya atas semuanya.</p>
 
-            <div class="saved-messages" id="savedMessages"></div>
+                <p>Aku nunggu momen ini selama <strong>20 hari lebih</strong>, untuk bilang hal ini, aku gapernah nyesel sekalipun kenal sama kamu atau sakit hati gaada sama sekali, malah seneng banget.</p>
+
+                <div class="highlight-box">
+                    <p><strong>Jujur ya</strong>, aku semenjak kenal kamu beneran ngerubah jalan hidup aku. Gila, dari yang awalnya aku jarang sholat di sekolah pas kelas 11 ini, jadi sering sholat. Dari aku yang jarang berdoa jadi doa terus, dari aku yang jarang sholat tepat waktu jadi tepat waktu. Kenapa? Biar setara. Kamu berdoa untuk aku.. aku berdoa untuk kamu kayak ayam geprek campur sambal ENAK 😂</p>
+                </div>
+
+                <div class="divider"></div>
+
+                <p>Itu atas kesadaran aku untuk memperbaiki demi Allah, demi orangtua dan keluarga, habis itu demi kamu. Tapi ini beneran tbh aku gamau bohong, aku emg bukan cowo yg terbaik tapi ak mw mencoba menjadi yg terbaik entah buat keluarga ak, atau km, So I'm just trying to be the best version of myself all my life. I want to prove myself until I become the best version of myself, tunggu ya, sama terakhir, kalau sudah lulus nanti jgn lost contact... Idk if you like me too or if it's just me.. Tapi <strong>terimakasih kamu udah ada</strong>, semenjak ada kamu emang ada tujuan yang bener.</p>
+
+                <p>ak ngerasa ini perlu disikapi dengan kesadaran penuh. maka dari itu, aku memilih untuk berproses dan konsisten memperbaiki diri. bukan semata mengejar perasaan, melainkan karena aku paham "tanpa perubahan, ak pasti terus memikirkan kelayakan ak untuk merasa sejajar dengan lu".</p>
+
+                <div class="divider"></div>
+
+                <p>Jadi intinya <strong>TERIMAKASIH BANYAK</strong>, berkat kamu ak jadi bisa menjadi org yg lebih baik, MAGANDA KA, mahal kita dahil kay allah. maaf kalau ini terlalu kelewatan.</p>
+
+                <div class="highlight-box">
+                    <p style="text-align: center; font-size: 1.05em;">Selamat berjuang.. sukses, have a nice day Feri<br><strong>WISH YOU ALL THE BEST! 🌟</strong></p>
+                </div>
+            </div>
+
+            <div class="input-section">
+                <label class="input-label">💝 Tulis harapan kamu atau terimakasih atas syukur selama ini</label>
+                <textarea 
+                    class="message-input" 
+                    id="userMessage"
+                    placeholder="Ketik pesanmu di sini..."></textarea>
+                <button class="submit-btn" onclick="saveMessage()">
+                    Kirim Pesan ✨
+                </button>
+
+                <div class="saved-messages" id="savedMessages"></div>
+            </div>
         </div>
     </div>
 
     <script>
-        // Create floating elements
-        const floatEmojis = ['🌸', '🦋', '✨', '💫', '🌺', '🎀', '💜', '🦇', '🍒', '💎', '🎃', '⭐'];
-        const floatingContainer = document.getElementById('floatingElements');
-        
-        for(let i = 0; i < 20; i++) {
-            const item = document.createElement('div');
-            item.className = 'float-item';
-            item.textContent = floatEmojis[Math.floor(Math.random() * floatEmojis.length)];
-            item.style.left = Math.random() * 100 + '%';
-            item.style.top = Math.random() * 100 + '%';
-            item.style.animationDelay = Math.random() * 15 + 's';
-            item.style.animationDuration = (Math.random() * 10 + 10) + 's';
-            floatingContainer.appendChild(item);
+        // Memory Game Variables
+        const emojis = ['💜', '🎀', '🦋', '✨', '💖', '🌸', '🎁', '⭐'];
+        let cards = [...emojis, ...emojis];
+        let flippedCards = [];
+        let matchedPairs = 0;
+        let moves = 0;
+        let gameTimer;
+        let seconds = 0;
+
+        function shuffle(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
         }
 
-        // Create particles
-        const particlesContainer = document.getElementById('particles');
-        
-        function createParticle() {
-            const particle = document.createElement('div');
-            particle.className = 'particle';
-            particle.style.left = Math.random() * 100 + '%';
-            particle.style.animationDuration = (Math.random() * 3 + 3) + 's';
-            particle.style.animationDelay = Math.random() * 2 + 's';
-            particlesContainer.appendChild(particle);
+        function initGame() {
+            cards = shuffle([...emojis, ...emojis]);
+            const grid = document.getElementById('memoryGrid');
+            grid.innerHTML = '';
             
-            setTimeout(() => particle.remove(), 6000);
+            cards.forEach((emoji, index) => {
+                const card = document.createElement('div');
+                card.className = 'memory-card';
+                card.dataset.index = index;
+                card.dataset.emoji = emoji;
+                card.innerHTML = `
+                    <div class="card-front">❓</div>
+                    <div class="card-back">${emoji}</div>
+                `;
+                card.onclick = () => flipCard(card);
+                grid.appendChild(card);
+            });
+
+            startTimer();
         }
 
-        for(let i = 0; i < 30; i++) {
-            setTimeout(createParticle, i * 200);
+        function startTimer() {
+            gameTimer = setInterval(() => {
+                seconds++;
+                document.getElementById('timer').textContent = seconds + 's';
+            }, 1000);
         }
-        setInterval(createParticle, 400);
+
+        function flipCard(card) {
+            if (flippedCards.length >= 2 || card.classList.contains('flipped') || card.classList.contains('matched')) {
+                return;
+            }
+
+            card.classList.add('flipped');
+            flippedCards.push(card);
+
+            if (flippedCards.length === 2) {
+                moves++;
+                document.getElementById('moves').textContent = moves;
+                checkMatch();
+            }
+        }
+
+        function checkMatch() {
+            const [card1, card2] = flippedCards;
+            
+            if (card1.dataset.emoji === card2.dataset.emoji) {
+                setTimeout(() => {
+                    card1.classList.add('matched');
+                    card2.classList.add('matched');
+                    matchedPairs++;
+                    document.getElementById('matches').textContent = `${matchedPairs}/8`;
+                    flippedCards = [];
+
+                    if (matchedPairs === 8) {
+                        clearInterval(gameTimer);
+                        setTimeout(() => {
+                            gameComplete();
+                        }, 600);
+                    }
+                }, 400);
+            } else {
+                setTimeout(() => {
+                    card1.classList.remove('flipped');
+                    card2.classList.remove('flipped');
+                    flippedCards = [];
+                }, 1000);
+            }
+        }
+
+        function gameComplete() {
+            document.getElementById('gameScreen').style.display = 'none';
+            document.getElementById('mainContent').style.display = 'block';
+            createConfetti();
+        }
+
+        function createConfetti() {
+            const confettiColors = ['#ff94d6', '#d946ef', '#a855f7', '#c77dff', '#e0aaff'];
+            
+            for(let i = 0; i < 150; i++) {
+                setTimeout(() => {
+                    const confetti = document.createElement('div');
+                    confetti.style.position = 'fixed';
+                    confetti.style.left = Math.random() * window.innerWidth + 'px';
+                    confetti.style.top = '-20px';
+                    confetti.style.width = '10px';
+                    confetti.style.height = '10px';
+                    confetti.style.backgroundColor = confettiColors[Math.floor(Math.random() * confettiColors.length)];
+                    confetti.style.zIndex = '999';
+                    confetti.style.borderRadius = Math.random() > 0.5 ? '50%' : '0';
+                    confetti.style.pointerEvents = 'none';
+                    
+                    const rotation = Math.random() * 360;
+                    const xMovement = (Math.random() - 0.5) * 200;
+                    
+                    confetti.animate([
+                        { transform: `translateY(0) rotate(0deg) translateX(0)`, opacity: 1 },
+                        { transform: `translateY(${window.innerHeight + 100}px) rotate(${rotation}deg) translateX(${xMovement}px)`, opacity: 0 }
+                    ], {
+                        duration: 3000 + Math.random() * 2000,
+                        easing: 'cubic-bezier(0.25, 0.46, 0.45, 0.94)'
+                    });
+                    
+                    document.body.appendChild(confetti);
+                    setTimeout(() => confetti.remove(), 5000);
+                }, i * 20);
+            }
+        }
 
         function loadMessages() {
             const messages = JSON.parse(localStorage.getItem('birthdayMessages') || '[]');
@@ -526,18 +760,7 @@
 
             localStorage.setItem('birthdayMessages', JSON.stringify(messages));
 
-            // Sparkle effect
-            for(let i = 0; i < 30; i++) {
-                setTimeout(() => {
-                    const sparkle = document.createElement('div');
-                    sparkle.className = 'sparkle-effect';
-                    sparkle.textContent = ['✨', '💖', '🎉', '🌟', '💫'][Math.floor(Math.random() * 5)];
-                    sparkle.style.left = Math.random() * window.innerWidth + 'px';
-                    sparkle.style.top = Math.random() * window.innerHeight + 'px';
-                    document.body.appendChild(sparkle);
-                    setTimeout(() => sparkle.remove(), 1000);
-                }, i * 40);
-            }
+            createConfetti();
 
             setTimeout(() => {
                 alert('💝 Pesanmu berhasil tersimpan!\n\nTerimakasih sudah berbagi! 🎉');
@@ -546,10 +769,9 @@
             }, 800);
         }
 
-        // Load messages on start
+        initGame();
         loadMessages();
 
-        // Enter to submit
         document.getElementById('userMessage').addEventListener('keydown', function(e) {
             if(e.key === 'Enter' && e.ctrlKey) {
                 saveMessage();
@@ -558,7 +780,3 @@
     </script>
 </body>
 </html>
-
-
-
-
