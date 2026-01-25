@@ -3,10 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Happy Birthday Feri</title>
+    <title>Happy Birthday Feri 🎀</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600&family=Patrick+Hand&display=swap');
         
+        :root {
+            /* Palet warna baru yang lebih soft dan estetik */
+            --bg-gradient-start: #fff0f5; /* Soft Blush */
+            --bg-gradient-end: #fce4ec;   /* Creamy Pink */
+            --primary-pink: #ffb7c5;      /* Pastel Pink */
+            --accent-mauve: #9d5c75;      /* Dusty Rose untuk teks penting */
+            --text-dark: #5a3a45;         /* Darker pink/brown untuk teks biasa */
+            --glass-bg: rgba(255, 255, 255, 0.75);
+            --glass-border: rgba(255, 255, 255, 0.8);
+            --polaroid-shadow: 5px 8px 20px rgba(157, 92, 117, 0.15);
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -15,604 +27,532 @@
 
         body {
             font-family: 'Inter', sans-serif;
-            background: linear-gradient(160deg, #ffd6f0 0%, #f5c3e6 30%, #e8b4dc 60%, #dba5d2 100%);
+            background: linear-gradient(135deg, var(--bg-gradient-start), var(--bg-gradient-end));
+            color: var(--text-dark);
             min-height: 100vh;
             overflow-x: hidden;
-            position: relative;
-            -webkit-overflow-scrolling: touch;
+            /* Menambahkan sedikit texture noise agar tidak terlalu flat */
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E");
         }
 
-        .ambient-bg {
-            position: fixed;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            z-index: 0;
-            pointer-events: none;
-            overflow: hidden;
-        }
-
-        .blob {
-            position: absolute;
-            border-radius: 50%;
-            filter: blur(80px);
-            opacity: 0.4;
-            animation: float 20s ease-in-out infinite;
-        }
-
-        .blob1 { width: 500px; height: 500px; background: #ff94d6; top: -150px; left: -150px; }
-        .blob2 { width: 450px; height: 450px; background: #c77dff; bottom: -150px; right: -150px; animation-delay: -5s; }
-        .blob3 { width: 400px; height: 400px; background: #ffd6f0; top: 40%; left: 50%; animation-delay: -10s; }
-        .blob4 { width: 350px; height: 350px; background: #e0aaff; top: 20%; right: -100px; animation-delay: -15s; }
-
-        @keyframes float {
-            0%, 100% { transform: translate(0, 0) scale(1); }
-            33% { transform: translate(50px, -50px) scale(1.1); }
-            66% { transform: translate(-50px, 50px) scale(0.9); }
+        /* Font khusus untuk kesan cute/handwritten */
+        .handwritten {
+            font-family: 'Patrick Hand', cursive;
         }
 
         .container {
-            max-width: 440px;
+            max-width: 580px; /* Sedikit lebih lebar untuk galeri masonry */
             margin: 0 auto;
-            padding: 20px;
+            padding: 20px 20px 100px 20px;
             position: relative;
-            z-index: 1;
+            z-index: 2;
         }
 
-        .game-screen {
-            display: block;
-            text-align: center;
+        /* --- GAME STYLES (Dipercantik) --- */
+        .game-section {
+            min-height: 90vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
         }
 
-        .main-content {
-            display: none;
+        .glass-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border-radius: 30px;
+            padding: 30px;
+            border: 2px solid var(--glass-border);
+            box-shadow: 0 15px 35px rgba(255, 183, 197, 0.2);
+            width: 100%;
         }
 
         .game-title {
             font-family: 'Space Grotesk', sans-serif;
-            font-size: 2.5em;
+            font-size: 2.2em;
             font-weight: 700;
-            background: linear-gradient(135deg, #d946ef, #a855f7, #7c3aed);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 20px;
-            animation: fadeInDown 0.8s;
-        }
-
-        @keyframes fadeInDown {
-            from { opacity: 0; transform: translateY(-30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .game-card {
-            background: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border-radius: 24px;
-            padding: 32px;
-            border: 1px solid rgba(255, 255, 255, 0.9);
-            margin-bottom: 20px;
-            box-shadow: 0 10px 30px rgba(124, 58, 237, 0.15);
-            will-change: transform;
-            transform: translateZ(0);
+            text-align: center;
+            color: var(--accent-mauve);
+            margin-bottom: 15px;
+            letter-spacing: -0.5px;
         }
 
         .game-instruction {
-            font-size: 1.05em;
-            color: #374151;
-            margin-bottom: 24px;
-            line-height: 1.6;
+            text-align: center;
+            margin-bottom: 25px;
+            color: var(--text-dark);
         }
 
         .memory-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 12px;
-            margin: 24px 0;
+            gap: 10px;
+            margin-bottom: 25px;
         }
 
         .memory-card {
             aspect-ratio: 1;
-            background: linear-gradient(135deg, #ff94d6, #d946ef);
-            border-radius: 16px;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1);
             cursor: pointer;
-            transition: all 0.4s;
+        }
+
+        .memory-card.flipped { transform: rotateY(180deg); }
+        
+        .memory-card .face {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 16px;
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 2.5em;
-            position: relative;
-            box-shadow: 0 4px 12px rgba(217, 70, 239, 0.3);
-            transform-style: preserve-3d;
+            box-shadow: 0 4px 10px rgba(157, 92, 117, 0.1);
         }
 
-        .memory-card.flipped {
+        .face.front {
             background: white;
+            color: var(--primary-pink);
+            border: 3px solid var(--primary-pink);
+        }
+
+        .face.back {
+            background: linear-gradient(135deg, var(--primary-pink), #ffd1dc);
             transform: rotateY(180deg);
-        }
-
-        .memory-card.matched {
-            background: linear-gradient(135deg, #a855f7, #7c3aed);
-            animation: matchPulse 0.6s;
-            pointer-events: none;
-        }
-
-        @keyframes matchPulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.1); }
-        }
-
-        .memory-card .card-front,
-        .memory-card .card-back {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            backface-visibility: hidden;
-            border-radius: 16px;
-        }
-
-        .memory-card .card-front {
-            background: linear-gradient(135deg, #ff94d6, #d946ef);
-        }
-
-        .memory-card .card-back {
-            background: white;
-            transform: rotateY(180deg);
+            border: 3px solid white;
         }
 
         .game-stats {
             display: flex;
-            justify-content: space-around;
-            margin-top: 20px;
-            gap: 12px;
-        }
-
-        .stat-box {
-            background: linear-gradient(135deg, rgba(217, 70, 239, 0.1), rgba(168, 85, 247, 0.1));
-            padding: 12px 20px;
-            border-radius: 12px;
-            flex: 1;
-        }
-
-        .stat-label {
-            font-size: 0.85em;
-            color: #6b7280;
-            margin-bottom: 4px;
-        }
-
-        .stat-value {
-            font-size: 1.3em;
-            font-weight: 700;
-            color: #a855f7;
-        }
-
-        .hero-section {
-            text-align: center;
-            margin-bottom: 30px;
-            animation: fadeInDown 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        .title {
+            justify-content: center;
+            gap: 15px;
             font-family: 'Space Grotesk', sans-serif;
-            font-size: 2.8em;
+            color: var(--accent-mauve);
             font-weight: 700;
-            background: linear-gradient(135deg, #d946ef, #a855f7, #7c3aed);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 8px;
-            letter-spacing: -1px;
         }
 
-        .subtitle {
-            font-size: 1.1em;
-            color: #7c3aed;
-            font-weight: 500;
-        }
-
-        .photo-gallery {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 12px;
-            margin-bottom: 16px;
-            animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.2s backwards;
-        }
-
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .photo-item {
-            background: rgba(255, 255, 255, 0.75);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
+        .stat-pill {
+            background: white;
+            padding: 8px 16px;
             border-radius: 20px;
-            padding: 12px;
-            border: 1px solid rgba(255, 255, 255, 0.8);
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-            position: relative;
-            overflow: hidden;
-            will-change: transform;
-            transform: translateZ(0);
+            box-shadow: 0 2px 8px rgba(157, 92, 117, 0.1);
         }
 
-        .photo-item::before {
-            content: '';
+        /* --- TRANSITION: ENVELOPE ANIMATION --- */
+        .transition-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(135deg, var(--bg-gradient-start), var(--bg-gradient-end));
+            z-index: 100;
+            display: none; /* Hidden initially */
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .envelope-container {
+            width: 200px;
+            height: 140px;
+            background: #ffc2d1;
+            position: relative;
+            border-radius: 0 0 10px 10px;
+            box-shadow: 0 10px 25px rgba(157, 92, 117, 0.2);
+            cursor: pointer;
+            animation: floatEnvelope 3s ease-in-out infinite;
+        }
+
+        @keyframes floatEnvelope {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .envelope-lid {
             position: absolute;
             top: 0;
             left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(135deg, rgba(217, 70, 239, 0.05), rgba(124, 58, 237, 0.05));
+            width: 0;
+            height: 0;
+            border-left: 100px solid transparent;
+            border-right: 100px solid transparent;
+            border-top: 70px solid #ff9eb5;
+            transform-origin: top;
+            transition: transform 0.8s ease;
+            z-index: 2;
+        }
+
+        .envelope-letter {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            width: 180px;
+            height: 120px;
+            background: white;
+            border-radius: 5px;
+            z-index: 1;
+            transition: transform 0.8s ease 0.4s; /* Delay letter popup */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+        }
+
+        .envelope-container.open .envelope-lid {
+            transform: rotateX(180deg);
+        }
+
+        .envelope-container.open .envelope-letter {
+            transform: translateY(-80px);
+        }
+        
+        .tap-hint {
+            margin-top: 30px;
+            font-family: 'Patrick Hand', cursive;
+            color: var(--accent-mauve);
+            font-size: 1.2em;
+            opacity: 0.8;
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse { 0%, 100% { opacity: 0.8; } 50% { opacity: 0.4; } }
+
+
+        /* --- MAIN CONTENT (AESTHETIC REDESIGN) --- */
+        .main-content {
+            display: none; /* Hidden initially */
             opacity: 0;
-            transition: opacity 0.4s;
+            transition: opacity 1s ease;
+        }
+        
+        .main-content.visible { opacity: 1; }
+
+        .hero-header {
+            text-align: center;
+            margin-bottom: 40px;
         }
 
-        .photo-item:hover::before {
-            opacity: 1;
+        .hero-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 3em;
+            font-weight: 700;
+            color: var(--accent-mauve);
+            line-height: 1.1;
         }
 
-        .photo-item:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 20px 40px rgba(124, 58, 237, 0.2);
+        .hero-subtitle {
+            font-family: 'Patrick Hand', cursive;
+            font-size: 1.8em;
+            color: var(--primary-pink);
+            margin-top: 5px;
         }
 
-        .photo-large {
-            grid-column: span 2;
+        /* --- MASONRY POLAROID GALLERY --- */
+        .gallery-masonry {
+            column-count: 2; /* Membuat 2 kolom seperti Pinterest */
+            column-gap: 20px;
+            margin-bottom: 40px;
         }
 
-        .photo-wrapper {
-            position: relative;
+        .photo-polaroid {
+            break-inside: avoid; /* Mencegah foto terpotong antar kolom */
+            background: white;
+            padding: 12px 12px 35px 12px; /* Padding bawah lebih besar ala polaroid */
+            box-shadow: var(--polaroid-shadow);
+            margin-bottom: 20px;
+            transform: rotate(var(--tilt)); /* Kemiringan acak */
+            transition: all 0.3s ease;
+        }
+
+        /* Memberikan kemiringan acak pada setiap foto agar terlihat natural */
+        .photo-polaroid:nth-child(odd) { --tilt: -2deg; }
+        .photo-polaroid:nth-child(even) { --tilt: 2.5deg; }
+        .photo-polaroid:nth-child(3n) { --tilt: -1.5deg; }
+
+        .photo-polaroid:hover {
+            transform: rotate(0) scale(1.02);
+            box-shadow: 0 15px 40px rgba(157, 92, 117, 0.25);
+            z-index: 10;
+        }
+
+        .photo-polaroid img {
             width: 100%;
-            padding-top: 100%;
-            border-radius: 16px;
-            overflow: hidden;
-            background: linear-gradient(135deg, #ffd6f0, #f5c3e6);
-        }
-
-        .photo-large .photo-wrapper {
-            padding-top: 60%;
-        }
-
-        .photo-wrapper img {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        .photo-item:hover .photo-wrapper img {
-            transform: scale(1.05);
+            height: auto;
+            display: block;
+            filter: contrast(1.05) brightness(1.02); /* Sedikit filter agar pop */
         }
 
         .photo-caption {
-            margin-top: 8px;
-            font-size: 0.85em;
-            color: #7c3aed;
-            font-weight: 500;
+            font-family: 'Patrick Hand', cursive;
+            text-align: center;
+            color: var(--text-dark);
+            font-size: 1.1em;
+            margin-top: 12px;
+            position: absolute;
+            bottom: 5px;
+            left: 0;
+            width: 100%;
+        }
+
+        /* --- LETTER SECTION --- */
+        .letter-container {
+            background: white;
+            padding: 40px 30px;
+            box-shadow: 0 10px 40px rgba(157, 92, 117, 0.1);
+            position: relative;
+            /* Efek kertas */
+            background-image: linear-gradient(#f8f8f8 2px, transparent 2px);
+            background-size: 100% 30px;
+            line-height: 30px; /* Menyamakan dengan garis background */
+        }
+        
+        /* Hiasan selotip di ujung kertas */
+        .letter-container::before, .letter-container::after {
+            content: '';
+            position: absolute;
+            width: 40px; height: 15px;
+            background: rgba(255, 183, 197, 0.5);
+            transform: rotate(-45deg);
+        }
+        .letter-container::before { top: -5px; left: -15px; }
+        .letter-container::after { bottom: -5px; right: -15px; transform: rotate(-35deg); }
+
+        .letter-content p {
+            margin-bottom: 25px;
+            font-size: 1.05em;
+        }
+
+        .highlight-text {
+            font-family: 'Patrick Hand', cursive;
+            font-size: 1.3em;
+            color: var(--accent-mauve);
+            background: linear-gradient(to top, #ffd1dc 40%, transparent 40%);
+        }
+
+        .divider-heart {
+            text-align: center;
+            font-size: 1.5em;
+            color: var(--primary-pink);
+            margin: 30px 0;
+        }
+
+        /* --- INPUT SECTION --- */
+        .input-card {
+            margin-top: 40px;
             text-align: center;
         }
 
-        .message-card {
-            background: rgba(255, 255, 255, 0.75);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border-radius: 24px;
-            padding: 28px;
-            border: 1px solid rgba(255, 255, 255, 0.8);
-            margin-bottom: 16px;
-            animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.4s backwards;
-            will-change: transform;
-            transform: translateZ(0);
-        }
-
-        .message-card p {
-            font-size: 1em;
-            line-height: 1.8;
-            color: #374151;
-            margin-bottom: 16px;
-        }
-
-        .message-card strong {
-            color: #a855f7;
-            font-weight: 600;
-        }
-
-        .highlight-box {
-            background: linear-gradient(135deg, rgba(217, 70, 239, 0.1), rgba(168, 85, 247, 0.1));
-            border-left: 4px solid #a855f7;
-            border-radius: 12px;
-            padding: 20px;
-            margin: 20px 0;
-        }
-
-        .input-section {
-            background: rgba(255, 255, 255, 0.75);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border-radius: 24px;
-            padding: 28px;
-            border: 1px solid rgba(255, 255, 255, 0.8);
-            animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.6s backwards;
-            will-change: transform;
-            transform: translateZ(0);
-        }
-
-        .input-label {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 1.1em;
-            font-weight: 600;
-            color: #1f2937;
-            margin-bottom: 12px;
-            display: block;
-        }
-
         .message-input {
-            width: 100%;
-            padding: 16px;
-            border: 2px solid #e5e7eb;
-            border-radius: 16px;
-            font-size: 1em;
-            font-family: inherit;
-            resize: vertical;
-            min-height: 120px;
-            transition: all 0.3s;
             background: white;
+            border: 2px solid #ffd1dc;
+            border-radius: 15px;
+            padding: 15px;
+            width: 100%;
+            font-family: 'Inter', sans-serif;
+            min-height: 100px;
+            margin-bottom: 15px;
         }
 
         .message-input:focus {
             outline: none;
-            border-color: #a855f7;
-            box-shadow: 0 0 0 4px rgba(168, 85, 247, 0.1);
+            border-color: var(--accent-mauve);
         }
 
-        .submit-btn {
-            width: 100%;
-            padding: 16px;
-            margin-top: 12px;
-            background: linear-gradient(135deg, #d946ef, #a855f7);
+        .btn-kirim {
+            background: var(--accent-mauve);
             color: white;
             border: none;
-            border-radius: 16px;
-            font-size: 1.05em;
-            font-weight: 600;
+            padding: 12px 30px;
+            border-radius: 30px;
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700;
+            font-size: 1em;
             cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-            box-shadow: 0 4px 12px rgba(168, 85, 247, 0.3);
+            transition: transform 0.2s;
+            box-shadow: 0 5px 15px rgba(157, 92, 117, 0.3);
         }
 
-        .submit-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(168, 85, 247, 0.4);
-        }
+        .btn-kirim:hover { transform: translateY(-3px); }
 
-        .submit-btn:active {
-            transform: translateY(0);
+        /* --- MUSIC BUTTON (Lebih Minimalis) --- */
+        .music-btn {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            width: 45px; height: 45px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center; justify-content: center;
+            box-shadow: 0 5px 15px rgba(157, 92, 117, 0.2);
+            cursor: pointer;
+            z-index: 999;
+            font-size: 1.2em;
+            color: var(--accent-mauve);
         }
-
-        .saved-messages {
-            margin-top: 20px;
-            max-height: 400px;
-            overflow-y: auto;
-        }
-
-        .saved-message {
-            background: linear-gradient(135deg, rgba(217, 70, 239, 0.05), rgba(168, 85, 247, 0.05));
-            border-left: 3px solid #a855f7;
-            border-radius: 12px;
-            padding: 16px;
-            margin-bottom: 12px;
-            animation: slideIn 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        @keyframes slideIn {
-            from { opacity: 0; transform: translateX(-20px); }
-            to { opacity: 1; transform: translateX(0); }
-        }
-
-        .saved-message-text {
-            color: #374151;
-            line-height: 1.6;
-            margin-bottom: 8px;
-        }
-
-        .saved-message-time {
-            font-size: 0.85em;
-            color: #9ca3af;
-        }
-
-        .divider {
-            height: 1px;
-            background: linear-gradient(90deg, transparent, #e5e7eb, transparent);
-            margin: 20px 0;
-        }
-
-        @media (max-width: 400px) {
-            .title { font-size: 2.2em; }
-            .photo-gallery { gap: 10px; }
-            .photo-item { padding: 10px; }
+        
+        /* Responsif untuk masonry */
+        @media (max-width: 480px) {
+            .gallery-masonry {
+                column-count: 1; /* 1 kolom di HP biar foto besar */
+                column-gap: 0;
+            }
+            .hero-title { font-size: 2.5em; }
             .memory-grid { gap: 8px; }
+            .face { font-size: 2em; }
+            .letter-container { padding: 30px 20px; }
         }
     </style>
 </head>
 <body>
-    <div class="ambient-bg">
-        <div class="blob blob1"></div>
-        <div class="blob blob2"></div>
-        <div class="blob blob3"></div>
-        <div class="blob blob4"></div>
+
+    <audio id="bgMusic" loop>
+        <source src="backsound.mp3" type="audio/mp3">
+    </audio>
+    <div class="music-btn muted" id="musicToggle">🔇</div>
+
+    <div class="transition-overlay" id="envelopeOverlay">
+        <div class="envelope-container" id="envelope">
+            <div class="envelope-lid"></div>
+            <div class="envelope-letter">💌</div>
+        </div>
+        <p class="tap-hint handwritten">Ketuk amplopnya untuk membuka...</p>
     </div>
 
-    <div class="container">
-        <!-- Game Screen -->
-        <div class="game-screen" id="gameScreen">
-            <h1 class="game-title">🎮 Memory Game 🎮</h1>
-            
-            <div class="game-card">
-                <p class="game-instruction">
-                    <strong>Cocokkan semua pasangan kartu!</strong><br>
-                    Klik kartu untuk membaliknya dan temukan pasangannya 🎯
-                </p>
 
-                <div class="memory-grid" id="memoryGrid"></div>
+    <div class="container">
+        <section class="game-section" id="gameSection">
+            <div class="glass-card">
+                <h1 class="game-title">✨ Memory Mission ✨</h1>
+                <p class="game-instruction handwritten">Selesaikan misi ini untuk membuka kejutan spesial!</p>
+                
+                <div class="memory-grid" id="memoryGrid">
+                    </div>
 
                 <div class="game-stats">
-                    <div class="stat-box">
-                        <div class="stat-label">Gerakan</div>
-                        <div class="stat-value" id="moves">0</div>
-                    </div>
-                    <div class="stat-box">
-                        <div class="stat-label">Pasangan</div>
-                        <div class="stat-value" id="matches">0/8</div>
-                    </div>
-                    <div class="stat-box">
-                        <div class="stat-label">Waktu</div>
-                        <div class="stat-value" id="timer">0s</div>
-                    </div>
+                    <div class="stat-pill">Moves: <span id="moves">0</span></div>
+                    <div class="stat-pill">Pairs: <span id="matches">0</span>/8</div>
                 </div>
             </div>
-        </div>
+        </section>
 
-        <!-- Main Content -->
-        <div class="main-content" id="mainContent">
-            <div class="hero-section">
-                <h1 class="title">Happy Birthday</h1>
-                <p class="subtitle">Feri 🎂</p>
-            </div>
 
-            <div class="photo-gallery">
-                <div class="photo-item photo-large">
-                    <div class="photo-wrapper">
-                        <img src="freya1.jpg" alt="Freya 1">
-                    </div>
+        <section class="main-content" id="mainContent">
+            
+            <header class="hero-header">
+                <h1 class="hero-title">Happy Birthday,</h1>
+                <h2 class="hero-subtitle">Our Dearest Feri 💖</h2>
+            </header>
+
+            <div class="gallery-masonry">
+                <div class="photo-polaroid">
+                    <img src="freya1.jpg" alt="Freya 1">
                     <div class="photo-caption">bokem 🌟</div>
                 </div>
 
-                <div class="photo-item">
-                    <div class="photo-wrapper">
-                        <img src="melody1.jpg" alt="Melody 1">
-                    </div>
+                <div class="photo-polaroid">
+                    <img src="melody1.jpg" alt="Melody 1"> 
                     <div class="photo-caption">My Melody 🎀</div>
                 </div>
-
-                <div class="photo-item">
-                    <div class="photo-wrapper">
-                        <img src="melody2.jpg" alt="Melody 2">
-                    </div>
+                
+                <div class="photo-polaroid">
+                     <img src="melody2.jpg" alt="Melody 2">
                     <div class="photo-caption">So Cute! 🌸</div>
                 </div>
 
-                <div class="photo-item photo-large">
-                    <div class="photo-wrapper">
-                        <img src="freya2.jpg" alt="Freya 2">
-                    </div>
+                <div class="photo-polaroid">
+                    <img src="freya2.jpg" alt="Freya 2">
                     <div class="photo-caption">Bocil kematian 💖</div>
                 </div>
 
-                <div class="photo-item">
-                    <div class="photo-wrapper">
-                        <img src="kuromi.png" alt="Kuromi">
-                    </div>
+                 <div class="photo-polaroid">
+                    <img src="kuromi.png" alt="Kuromi">
                     <div class="photo-caption">Kuromi 💜</div>
                 </div>
 
-                <div class="photo-item">
-                    <div class="photo-wrapper">
-                        <img src="melody3.jpg" alt="Melody 3">
-                    </div>
+                <div class="photo-polaroid">
+                     <img src="melody3.jpg" alt="Melody 3">
                     <div class="photo-caption">Melody 💕</div>
                 </div>
 
-                <div class="photo-item">
-                    <div class="photo-wrapper">
-                        <img src="kenangan1.png" alt="Kenangan 1">
-                    </div>
+                 <div class="photo-polaroid">
+                    <img src="kenangan1.png" alt="Kenangan 1">
                     <div class="photo-caption">Kenangan Bersama 📸</div>
                 </div>
 
-                <div class="photo-item">
-                    <div class="photo-wrapper">
-                        <img src="kenangan2.png" alt="Kenangan 2">
-                    </div>
+                 <div class="photo-polaroid">
+                    <img src="kenangan2.png" alt="Kenangan 2">
                     <div class="photo-caption">Memories ✨</div>
                 </div>
 
-                <div class="photo-item photo-large">
-                    <div class="photo-wrapper">
-                        <img src="fotbar1.jpg" alt="Fotbar 1">
-                    </div>
+                 <div class="photo-polaroid">
+                    <img src="fotbar1.jpg" alt="Fotbar 1">
+                    <div class="photo-caption">Fotbar 1 📸</div>
                 </div>
 
-                <div class="photo-item photo-large">
-                    <div class="photo-wrapper">
-                        <img src="fotbar2.jpg" alt="Fotbar 2">
-                    </div>
+                 <div class="photo-polaroid">
+                    <img src="fotbar2.jpg" alt="Fotbar 2">
+                    <div class="photo-caption">Fotbar 2 💕</div>
                 </div>
 
-                <div class="photo-item photo-large">
-                    <div class="photo-wrapper">
-                        <img src="fotbar3.jpg" alt="Fotbar 3">
-                    </div>
+                 <div class="photo-polaroid">
+                    <img src="fotbar3.jpg" alt="Fotbar 3">
+                    <div class="photo-caption">Fotbar 3 ✨</div>
+                </div>
+                 </div>
+
+
+            <div class="letter-container">
+                <div class="letter-content">
+                    <p>Pertama aku mau bilang <strong>SELAMAT ULANG TAHUN</strong> dan terimakasih kalau kamu udah jadi teman aku walau ada masalah dikit akibat kita yang belum terlalu kenal, tapi maaf ya atas ke-isengan aku waktu itu.. Aku ngirain-nya kamu nggak sampai segitunya, I'm so sorry.. maaf sudah bikin kamu ovt karena aku.. sekali lagi aku minta maaf ya atas semuanya.</p>
+
+                    <p>Aku nunggu momen ini selama <strong>20 hari lebih</strong>, untuk bilang hal ini, aku gapernah nyesel sekalipun kenal sama kamu atau sakit hati gaada sama sekali, malah seneng banget.</p>
+
+                    <div class="divider-heart">❦</div>
+
+                    <p><span class="highlight-text">Jujur ya,</span> aku semenjak kenal kamu beneran ngerubah jalan hidup aku. Gila, dari yang awalnya aku jarang sholat di sekolah pas kelas 11 ini, jadi sering sholat. Dari aku yang jarang berdoa jadi doa terus, dari aku yang jarang sholat tepat waktu jadi tepat waktu. Kenapa? Biar setara. Kamu berdoa untuk aku.. aku berdoa untuk kamu kayak ayam geprek campur sambal ENAK 😂</p>
+
+                    <div class="divider-heart">❦</div>
+
+                    <p>Itu atas kesadaran aku untuk memperbaiki demi Allah, demi orangtua dan keluarga, habis itu demi kamu. Tapi ini beneran tbh aku gamau bohong, aku emg bukan cowo yg terbaik tapi ak mw mencoba menjadi yg terbaik entah buat keluarga ak, atau km, <span class="handwritten">So I'm just trying to be the best version of myself all my life.</span> I want to prove myself until I become the best version of myself, tunggu ya, sama terakhir, kalau sudah lulus nanti jgn lost contact... Idk if you like me too or if it's just me.. Tapi <strong>terimakasih kamu udah ada</strong>, semenjak ada kamu emang ada tujuan yang bener.</p>
+
+                    <p>ak ngerasa ini perlu disikapi dengan kesadaran penuh. maka dari itu, aku memilih untuk berproses dan konsisten memperbaiki diri. bukan semata mengejar perasaan, melainkan karena aku paham "tanpa perubahan, ak pasti terus memikirkan kelayakan ak untuk merasa sejajar dengan lu". You're someone really valuable to me, even though you can be annoying sometimes. That's why I'm putting in this much effort for you. Let's keep this as close friends no need to force a relationship buat dosa aja yakan at least saling suka (kalau suka bilang 1 dibawah hukumnya wajib) aaodjabdajndkadajdbajdnaj izin yg bntr lagi jadi maba.</p>
+
+                    <div class="divider-heart">❦</div>
+
+                    <p>Jadi intinya <strong>TERIMAKASIH BANYAK</strong>, berkat kamu ak jadi bisa menjadi org yg lebih baik, MAGANDA KA, mahal kita dahil kay allah. winning in life couse i literlly found the most sweetest girl even at my lowest, she was able to put a smile on my face. l love her sm. maaf kalau ini terlalu kelewatan.</p>
+
+                    <p class="handwritten" style="text-align: center; font-size: 1.2em; margin-top: 40px;">
+                        "Selamat berjuang.. sukses, have a nice day Feri. semakin lama mengenalmu semakin banyak alasanku mencintaimu. I'm always proud of you. I don't care what you choose to do, as long as it's a good thing.<br><strong>WISH YOU ALL THE BEST! 🌟</strong>"
+                    </p>
                 </div>
             </div>
 
-            <div class="message-card">
-                <p>Pertama aku mau bilang <strong>SELAMAT ULANG TAHUN</strong> dan terimakasih kalau kamu udah jadi teman aku walau ada masalah dikit akibat kita yang belum terlalu kenal, tapi maaf ya atas ke-isengan aku waktu itu.. Aku ngirain-nya kamu nggak sampai segitunya, I'm so sorry.. maaf sudah bikin kamu ovt karena aku.. sekali lagi aku minta maaf ya atas semuanya.</p>
 
-                <p>Aku nunggu momen ini selama <strong>20 hari lebih</strong>, untuk bilang hal ini, aku gapernah nyesel sekalipun kenal sama kamu atau sakit hati gaada sama sekali, malah seneng banget.</p>
-
-                <div class="highlight-box">
-                    <p><strong>Jujur ya</strong>, aku semenjak kenal kamu beneran ngerubah jalan hidup aku. Gila, dari yang awalnya aku jarang sholat di sekolah pas kelas 11 ini, jadi sering sholat. Dari aku yang jarang berdoa jadi doa terus, dari aku yang jarang sholat tepat waktu jadi tepat waktu. Kenapa? Biar setara. Kamu berdoa untuk aku.. aku berdoa untuk kamu kayak ayam geprek campur sambal ENAK 😂</p>
-                </div>
-
-                <div class="divider"></div>
-
-                <p>Itu atas kesadaran aku untuk memperbaiki demi Allah, demi orangtua dan keluarga, habis itu demi kamu. Tapi ini beneran tbh aku gamau bohong, aku emg bukan cowo yg terbaik tapi ak mw mencoba menjadi yg terbaik entah buat keluarga ak, atau km, So I'm just trying to be the best version of myself all my life. I want to prove myself until I become the best version of myself, tunggu ya, sama terakhir, kalau sudah lulus nanti jgn lost contact... Idk if you like me too or if it's just me.. Tapi <strong>terimakasih kamu udah ada</strong>, semenjak ada kamu emang ada tujuan yang bener.</p>
-
-                <p>ak ngerasa ini perlu disikapi dengan kesadaran penuh. maka dari itu, aku memilih untuk berproses dan konsisten memperbaiki diri. bukan semata mengejar perasaan, melainkan karena aku paham "tanpa perubahan, ak pasti terus memikirkan kelayakan ak untuk merasa sejajar dengan lu". You’re someone really valuable to me, even though you can be annoying sometimes. That’s why I’m putting in this much effort for you. Let’s keep this as close friends no need to force a relationship buat dosa aja yakan at least saling suka (kalau suka bilang 1 dibawah hukumnya wajib) aaodjabdajndkadajdbajdnaj izin yg bntr lagi jadi maba.</p>
-
-                <div class="divider"></div>
-
-                <p>Jadi intinya <strong>TERIMAKASIH BANYAK</strong>, berkat kamu ak jadi bisa menjadi org yg lebih baik, MAGANDA KA, mahal kita dahil kay allah. winning in life couse i literlly found the most sweetest girl even at my lowest, she was able to put a smile on my face. l love her sm. maaf kalau ini terlalu kelewatan.</p>
-
-                <div class="highlight-box">
-                    <p style="text-align: center; font-size: 1.05em;">Selamat berjuang.. sukses, have a nice day Feri. semakin lama mengenalmu semakin banyak alasanku mencintaimu. I’m always proud of you. I don’t care what you choose to do, as long as it’s a good thing.<br><strong>WISH YOU ALL THE BEST! 🌟</strong></p>
-                </div>
+            <div class="glass-card input-card">
+                <label class="handwritten" style="font-size: 1.3em; display: block; margin-bottom: 15px;">
+                    💝 Tulis harapan kamu atau terimakasih atas syukur selama ini
+                </label>
+                <textarea class="message-input" id="userMessage" placeholder="Ketik pesanmu di sini..."></textarea>
+                <button class="btn-kirim" onclick="saveMessage()">Kirim Pesan ✨</button>
+                <div id="savedMessages" style="margin-top: 20px; text-align: left;"></div>
             </div>
 
-            <div class="input-section">
-                <label class="input-label">💝 Tulis harapan kamu atau terimakasih atas syukur selama ini</label>
-                <textarea 
-                    class="message-input" 
-                    id="userMessage"
-                    placeholder="Ketik pesanmu di sini..."></textarea>
-                <button class="submit-btn" onclick="saveMessage()">
-                    Kirim Pesan ✨
-                </button>
-
-                <div class="saved-messages" id="savedMessages"></div>
-            </div>
-        </div>
+        </section>
     </div>
 
+
     <script>
-        // Memory Game Variables
-        const emojis = ['💜', '🎀', '🦋', '✨', '💖', '🌸', '🎁', '⭐'];
-        let cards = [...emojis, ...emojis];
+        // --- MEMORY GAME LOGIC ---
+        // Menggunakan emoji cute yang berbeda
+        const emojis = ['🌸', '🥐', '🎀', '🧸', '🍓', '💖', '✨', '🍭'];
+        let cards = shuffle([...emojis, ...emojis]);
         let flippedCards = [];
         let matchedPairs = 0;
         let moves = 0;
-        let gameTimer;
-        let seconds = 0;
+        let gameActive = true;
 
         function shuffle(array) {
             for (let i = array.length - 1; i > 0; i--) {
@@ -623,37 +563,22 @@
         }
 
         function initGame() {
-            cards = shuffle([...emojis, ...emojis]);
             const grid = document.getElementById('memoryGrid');
-            grid.innerHTML = '';
-            
-            cards.forEach((emoji, index) => {
+            cards.forEach((emoji) => {
                 const card = document.createElement('div');
                 card.className = 'memory-card';
-                card.dataset.index = index;
                 card.dataset.emoji = emoji;
                 card.innerHTML = `
-                    <div class="card-front">❓</div>
-                    <div class="card-back">${emoji}</div>
+                    <div class="face front">❔</div>
+                    <div class="face back">${emoji}</div>
                 `;
                 card.onclick = () => flipCard(card);
                 grid.appendChild(card);
             });
-
-            startTimer();
-        }
-
-        function startTimer() {
-            gameTimer = setInterval(() => {
-                seconds++;
-                document.getElementById('timer').textContent = seconds + 's';
-            }, 1000);
         }
 
         function flipCard(card) {
-            if (flippedCards.length >= 2 || card.classList.contains('flipped') || card.classList.contains('matched')) {
-                return;
-            }
+            if (!gameActive || flippedCards.length >= 2 || card.classList.contains('flipped')) return;
 
             card.classList.add('flipped');
             flippedCards.push(card);
@@ -661,76 +586,135 @@
             if (flippedCards.length === 2) {
                 moves++;
                 document.getElementById('moves').textContent = moves;
+                gameActive = false;
                 checkMatch();
             }
         }
 
         function checkMatch() {
             const [card1, card2] = flippedCards;
-            
             if (card1.dataset.emoji === card2.dataset.emoji) {
-                setTimeout(() => {
-                    card1.classList.add('matched');
-                    card2.classList.add('matched');
-                    matchedPairs++;
-                    document.getElementById('matches').textContent = `${matchedPairs}/8`;
-                    flippedCards = [];
-
-                    if (matchedPairs === 8) {
-                        clearInterval(gameTimer);
-                        setTimeout(() => {
-                            gameComplete();
-                        }, 600);
-                    }
-                }, 400);
+                matchedPairs++;
+                document.getElementById('matches').textContent = matchedPairs;
+                flippedCards = [];
+                gameActive = true;
+                if (matchedPairs === emojis.length) {
+                    setTimeout(startTransition, 800);
+                }
             } else {
                 setTimeout(() => {
                     card1.classList.remove('flipped');
                     card2.classList.remove('flipped');
                     flippedCards = [];
+                    gameActive = true;
                 }, 1000);
             }
         }
 
-        function gameComplete() {
-            document.getElementById('gameScreen').style.display = 'none';
-            document.getElementById('mainContent').style.display = 'block';
-            createConfetti();
+        // --- TRANSITION & ENVELOPE LOGIC ---
+        const envelopeOverlay = document.getElementById('envelopeOverlay');
+        const envelope = document.getElementById('envelope');
+        const gameSection = document.getElementById('gameSection');
+        const mainContent = document.getElementById('mainContent');
+        const musicBtn = document.getElementById('musicToggle');
+        const bgMusic = document.getElementById('bgMusic');
+
+        function startTransition() {
+            // Hilangkan game section pelan-pelan
+            gameSection.style.transition = 'opacity 0.8s ease';
+            gameSection.style.opacity = '0';
+            
+            setTimeout(() => {
+                gameSection.style.display = 'none';
+                // Munculkan overlay amplop
+                envelopeOverlay.style.display = 'flex';
+                // Mulai musik pelan-pelan
+                playMusicFadeIn();
+            }, 800);
         }
 
-        function createConfetti() {
-            const confettiColors = ['#ff94d6', '#d946ef', '#a855f7', '#c77dff', '#e0aaff'];
+        // Event listener untuk membuka amplop
+        envelope.addEventListener('click', () => {
+            envelope.classList.add('open');
+            document.querySelector('.tap-hint').style.opacity = '0';
             
-            for(let i = 0; i < 150; i++) {
+            createConfetti(); // Hore!
+
+            // Setelah animasi amplop selesai, munculkan konten utama
+            setTimeout(() => {
+                envelopeOverlay.style.transition = 'opacity 0.8s ease';
+                envelopeOverlay.style.opacity = '0';
+                
                 setTimeout(() => {
-                    const confetti = document.createElement('div');
-                    confetti.style.position = 'fixed';
-                    confetti.style.left = Math.random() * window.innerWidth + 'px';
-                    confetti.style.top = '-20px';
-                    confetti.style.width = '10px';
-                    confetti.style.height = '10px';
-                    confetti.style.backgroundColor = confettiColors[Math.floor(Math.random() * confettiColors.length)];
-                    confetti.style.zIndex = '999';
-                    confetti.style.borderRadius = Math.random() > 0.5 ? '50%' : '0';
-                    confetti.style.pointerEvents = 'none';
-                    
-                    const rotation = Math.random() * 360;
-                    const xMovement = (Math.random() - 0.5) * 200;
-                    
-                    confetti.animate([
-                        { transform: `translateY(0) rotate(0deg) translateX(0)`, opacity: 1 },
-                        { transform: `translateY(${window.innerHeight + 100}px) rotate(${rotation}deg) translateX(${xMovement}px)`, opacity: 0 }
-                    ], {
-                        duration: 3000 + Math.random() * 2000,
-                        easing: 'cubic-bezier(0.25, 0.46, 0.45, 0.94)'
-                    });
-                    
-                    document.body.appendChild(confetti);
-                    setTimeout(() => confetti.remove(), 5000);
-                }, i * 20);
+                    envelopeOverlay.style.display = 'none';
+                    mainContent.style.display = 'block';
+                    // Sedikit delay agar display block tereaap dulu sebelum opacity diubah
+                    setTimeout(() => {
+                        mainContent.classList.add('visible');
+                    }, 50);
+                }, 800);
+            }, 1500); // Waktu tunggu animasi amplop terbuka penuh
+        });
+
+
+        // --- MUSIC CONTROL ---
+        function playMusicFadeIn() {
+            bgMusic.volume = 0;
+            bgMusic.play().then(() => {
+                musicBtn.classList.remove('muted');
+                musicBtn.textContent = '🎵';
+                let vol = 0;
+                const fade = setInterval(() => {
+                    if (vol < 0.6) { // Volume maks 0.6
+                        vol += 0.05;
+                        bgMusic.volume = vol;
+                    } else {
+                        clearInterval(fade);
+                    }
+                }, 200);
+            }).catch(e => console.log("Autoplay blocked, user need to interact"));
+        }
+
+        musicBtn.addEventListener('click', () => {
+            if (bgMusic.paused) {
+                bgMusic.play();
+                musicBtn.classList.remove('muted');
+                musicBtn.textContent = '🎵';
+            } else {
+                bgMusic.pause();
+                musicBtn.classList.add('muted');
+                musicBtn.textContent = '🔇';
+            }
+        });
+
+
+        // --- CONFETTI (Simplified for aesthetic) ---
+        function createConfetti() {
+            for (let i = 0; i < 100; i++) {
+                const confetti = document.createElement('div');
+                confetti.style.position = 'fixed';
+                confetti.style.left = Math.random() * 100 + 'vw';
+                confetti.style.top = '-10px';
+                confetti.style.width = Math.random() * 8 + 5 + 'px';
+                confetti.style.height = Math.random() * 8 + 5 + 'px';
+                confetti.style.backgroundColor = ['#ffb7c5', '#ffd1dc', '#fff', '#e0aaff'][Math.floor(Math.random() * 4)];
+                confetti.style.borderRadius = '50%';
+                confetti.style.zIndex = '9999';
+                document.body.appendChild(confetti);
+
+                const animation = confetti.animate([
+                    { transform: `translate(0, 0) rotate(0)`, opacity: 1 },
+                    { transform: `translate(${Math.random() * 100 - 50}px, ${window.innerHeight}px) rotate(${Math.random() * 360}deg)`, opacity: 0 }
+                ], {
+                    duration: Math.random() * 2000 + 3000,
+                    easing: 'cubic-bezier(0.25, 0.46, 0.45, 0.94)'
+                });
+
+                animation.onfinish = () => confetti.remove();
             }
         }
 
+        // --- SAVE MESSAGE (with localStorage) ---
         function loadMessages() {
             const messages = JSON.parse(localStorage.getItem('birthdayMessages') || '[]');
             const container = document.getElementById('savedMessages');
@@ -738,10 +722,14 @@
             
             messages.forEach(msg => {
                 const div = document.createElement('div');
-                div.className = 'saved-message';
+                div.style.background = 'rgba(255,255,255,0.5)';
+                div.style.padding = '10px';
+                div.style.borderRadius = '10px';
+                div.style.marginTop = '10px';
+                div.style.borderLeft = '3px solid var(--accent-mauve)';
                 div.innerHTML = `
-                    <div class="saved-message-text">${msg.text}</div>
-                    <div class="saved-message-time">${msg.time}</div>
+                    <div style="color: var(--text-dark); margin-bottom: 5px;">${msg.text}</div>
+                    <div style="font-size: 0.85em; color: #9ca3af;">${msg.time}</div>
                 `;
                 container.appendChild(div);
             });
@@ -782,15 +770,10 @@
             }, 800);
         }
 
+
+        // Initialize
         initGame();
         loadMessages();
-
-        document.getElementById('userMessage').addEventListener('keydown', function(e) {
-            if(e.key === 'Enter' && e.ctrlKey) {
-                saveMessage();
-            }
-        });
     </script>
 </body>
 </html>
-
